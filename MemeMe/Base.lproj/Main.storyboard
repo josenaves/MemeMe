@@ -52,6 +52,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonCamera" destination="Gls-Xy-jAU" id="nYS-nP-xvB"/>
+                        <outlet property="imageView" destination="WCB-R3-vQE" id="5WD-vY-cYp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
