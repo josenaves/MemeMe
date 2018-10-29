@@ -17,18 +17,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T9o-kr-QJ6">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9o-kr-QJ6">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="MemeMe" id="Ljw-jL-GoO">
                                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="QEE-DR-PsO"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P99-i7-cdX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WCB-R3-vQE">
+                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P99-i7-cdX">
                                 <rect key="frame" x="0.0" y="818" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="LfL-mS-26w"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem title="Album" id="L92-SI-izX">
                                         <connections>
@@ -43,12 +47,24 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WCB-R3-vQE">
-                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="P99-i7-cdX" firstAttribute="top" secondItem="WCB-R3-vQE" secondAttribute="bottom" id="1Qb-8s-d1q"/>
+                            <constraint firstItem="P99-i7-cdX" firstAttribute="leading" secondItem="T9o-kr-QJ6" secondAttribute="leading" id="5tI-dt-lqm"/>
+                            <constraint firstItem="P99-i7-cdX" firstAttribute="trailing" secondItem="T9o-kr-QJ6" secondAttribute="trailing" id="6Zg-op-yJm"/>
+                            <constraint firstItem="WCB-R3-vQE" firstAttribute="top" secondItem="T9o-kr-QJ6" secondAttribute="bottom" id="EcF-f1-DyV"/>
+                            <constraint firstItem="T9o-kr-QJ6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="M7a-Ds-j6c"/>
+                            <constraint firstItem="WCB-R3-vQE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="OTE-AU-5Lv"/>
+                            <constraint firstItem="P99-i7-cdX" firstAttribute="top" secondItem="WCB-R3-vQE" secondAttribute="bottom" id="SRB-xY-egt"/>
+                            <constraint firstItem="P99-i7-cdX" firstAttribute="trailing" secondItem="WCB-R3-vQE" secondAttribute="trailing" id="Ug8-r1-iLd"/>
+                            <constraint firstItem="P99-i7-cdX" firstAttribute="leading" secondItem="WCB-R3-vQE" secondAttribute="leading" id="c4R-gs-tW4"/>
+                            <constraint firstItem="WCB-R3-vQE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="grn-76-YPc"/>
+                            <constraint firstItem="P99-i7-cdX" firstAttribute="top" secondItem="WCB-R3-vQE" secondAttribute="bottom" id="k6X-KX-x7m"/>
+                            <constraint firstItem="WCB-R3-vQE" firstAttribute="top" secondItem="T9o-kr-QJ6" secondAttribute="bottom" id="l1a-p7-uTi"/>
+                            <constraint firstItem="P99-i7-cdX" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="lT6-Wb-K1C"/>
+                            <constraint firstItem="P99-i7-cdX" firstAttribute="top" secondItem="WCB-R3-vQE" secondAttribute="bottom" id="ugq-ps-rCi"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
