@@ -30,11 +30,12 @@
                                 <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Album" width="239" id="L92-SI-izX">
+                                    <barButtonItem title="Album" id="L92-SI-izX">
                                         <connections>
                                             <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="d22-je-xAm"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="d6r-mB-ReN"/>
                                     <barButtonItem style="plain" systemItem="camera" id="Gls-Xy-jAU">
                                         <connections>
                                             <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="ckM-Ot-YmO"/>
