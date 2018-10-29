@@ -12,6 +12,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBOutlet weak var buttonCamera: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var topMemeText: UITextField!
+    @IBOutlet weak var bottomMemeText: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         buttonCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -20,6 +22,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        configureTextProperties(topMemeText, "TOP")
+        configureTextProperties(bottomMemeText, "BOTTOM")
+    }
+    
+    func configureTextProperties(_ textField: UITextField, _ defaulText: String) {
+        textField.text = ""
+        textField.textAlignment = NSTextAlignment.center
+        textField.text = defaulText
+
+        let memeTextAttributes:[NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.strokeColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSAttributedString.Key.strokeWidth: 1.00
+        ]
+        
+        textField.defaultTextAttributes = memeTextAttributes
     }
 
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
