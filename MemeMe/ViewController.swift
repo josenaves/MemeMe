@@ -14,12 +14,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var topMemeText: UITextField!
     @IBOutlet weak var bottomMemeText: UITextField!
+    @IBOutlet weak var buttonShare: UIBarButtonItem!
+    @IBOutlet weak var toolbar: UIToolbar!
     
     var activeTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         buttonCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        
         // subcribe to keyboard notifications, to allow the view to raise when necessary
         subscribeToKeyboardNotifications()
     }
@@ -32,10 +33,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.topMemeText.delegate = self
-        self.bottomMemeText.delegate = self
+        topMemeText.delegate = self
+        bottomMemeText.delegate = self
         configureTextProperties(topMemeText, "TOP")
         configureTextProperties(bottomMemeText, "BOTTOM")
+        buttonShare.isEnabled = false
     }
     
     func configureTextProperties(_ textField: UITextField, _ defaulText: String) {
@@ -46,11 +48,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSAttributedString.Key.strokeWidth: 1.00,
+            NSAttributedString.Key.strokeWidth: -1.00,
             NSAttributedString.Key.paragraphStyle: paragraphStyle
         ]
         textField.defaultTextAttributes = memeTextAttributes
-
+        
+        // make the background transparent
+        textField.backgroundColor = UIColor.clear
+        
         textField.text = defaulText
     }
 
@@ -68,17 +73,43 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(pickerController, animated: true, completion: nil)
     }
     
+    @IBAction func shareMeme() {
+        // Create the meme
+        let meme = Meme(topText: topMemeText.text!,
+                        bottomText: bottomMemeText.text!,
+                        originalImage: imageView.image!,
+                        memedImage: generateMemedImage())
+        
+        // show the Activity Share
+        let activityViewController = UIActivityViewController(
+            activityItems: [meme.memedImage],
+            applicationActivities: nil)
+        
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // present the view controller
+        present(activityViewController, animated: true, completion: nil)
+        
+        // access the completion handler
+        activityViewController.completionWithItemsHandler = { activityType, completed, returnedItems, error in
+            if completed {
+                //  save on gallery
+                self.saveMemeInGallery(selectedImage: meme.memedImage)
+            }
+        }
+    }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("User canceled image selection")
         dismiss(animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        print("User picked an image")
         dismiss(animated: true, completion: nil)
         
+        buttonShare.isEnabled = true
+        
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            imageView.contentMode = .scaleAspectFit
+            imageView.contentMode = .scaleAspectFill
             imageView.image = image
         }
     }
@@ -124,26 +155,48 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func generateMemedImage() -> UIImage {
+        // Hide toolbar and navbar
+        hideBars()
         
-        // TODO: Hide toolbar and navbar
-
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        // TODO: Show toolbar and navbar
-
+        // Show toolbar and navbar
+        showBars()
+        
         return memedImage
     }
-
-    func save() {
-        // Create the meme
-        let meme = Meme(topText: topMemeText.text!,
-                        bottomText: bottomMemeText.text!,
-                        originalImage: imageView.image!,
-                        memedImage: generateMemedImage())
+    
+    func hideBars() {
+        navigationController?.setToolbarHidden(true, animated: true)
+        toolbar.isHidden = true
+    }
+    
+    func showBars() {
+        navigationController?.setToolbarHidden(false, animated: true)
+        toolbar.isHidden = false
+    }
+    
+    func saveMemeInGallery(selectedImage: UIImage) {
+        UIImageWriteToSavedPhotosAlbum(selectedImage, self, #selector(imageSavedCallback(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    // Add image to Library
+    @objc func imageSavedCallback(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            showAlertWith(title: "Save error", message: error.localizedDescription)
+        } else {
+            showAlertWith(title: "Saved!", message: "Your image has been saved to your photos.")
+        }
+    }
+    
+    func showAlertWith(title: String, message: String){
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
 }
-
