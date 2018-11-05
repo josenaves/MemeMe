@@ -21,7 +21,11 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="MemeMe" id="Ljw-jL-GoO">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="QEE-DR-PsO"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="QEE-DR-PsO">
+                                            <connections>
+                                                <action selector="shareMeme" destination="BYZ-38-t0r" id="VxG-Nq-lmE"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -49,12 +53,14 @@
                             </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zNR-4C-pVK">
                                 <rect key="frame" x="44" y="141" width="326" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0TP-67-T82">
                                 <rect key="frame" x="44" y="738" width="326" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -88,7 +94,9 @@
                     <connections>
                         <outlet property="bottomMemeText" destination="0TP-67-T82" id="Sfc-M0-PEg"/>
                         <outlet property="buttonCamera" destination="Gls-Xy-jAU" id="nYS-nP-xvB"/>
+                        <outlet property="buttonShare" destination="QEE-DR-PsO" id="hsc-ZZ-xoR"/>
                         <outlet property="imageView" destination="WCB-R3-vQE" id="5WD-vY-cYp"/>
+                        <outlet property="toolbar" destination="P99-i7-cdX" id="gjW-xJ-s4E"/>
                         <outlet property="topMemeText" destination="zNR-4C-pVK" id="slj-oP-DX2"/>
                     </connections>
                 </viewController>
