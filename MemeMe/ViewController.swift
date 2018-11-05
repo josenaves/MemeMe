@@ -39,17 +39,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func configureTextProperties(_ textField: UITextField, _ defaulText: String) {
-        textField.text = ""
-        textField.textAlignment = NSTextAlignment.center
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
 
         let memeTextAttributes:[NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSAttributedString.Key.strokeWidth: 1.00
+            NSAttributedString.Key.strokeWidth: 1.00,
+            NSAttributedString.Key.paragraphStyle: paragraphStyle
         ]
         textField.defaultTextAttributes = memeTextAttributes
-    
+
         textField.text = defaulText
     }
 
@@ -120,6 +121,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // This is important to only shift the view when we are editing the bottom text field
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
+    }
+    
+    func generateMemedImage() -> UIImage {
+        
+        // TODO: Hide toolbar and navbar
+
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        // TODO: Show toolbar and navbar
+
+        return memedImage
+    }
+
+    func save() {
+        // Create the meme
+        let meme = Meme(topText: topMemeText.text!,
+                        bottomText: bottomMemeText.text!,
+                        originalImage: imageView.image!,
+                        memedImage: generateMemedImage())
     }
 }
 
