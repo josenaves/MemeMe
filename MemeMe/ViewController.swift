@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomMemeText: UITextField!
     @IBOutlet weak var buttonShare: UIBarButtonItem!
     @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var buttonCancel: UIBarButtonItem!
     
     var activeTextField: UITextField!
     
@@ -71,6 +72,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         pickerController.delegate = self
         pickerController.sourceType = .photoLibrary
         present(pickerController, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancel() {
+        // close the app
+        UIControl().sendAction(#selector(NSXPCConnection.suspend),
+                               to: UIApplication.shared, for: nil)
     }
     
     @IBAction func shareMeme() {
