@@ -17,6 +17,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var buttonShare: UIBarButtonItem!
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var buttonCancel: UIBarButtonItem!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     var activeTextField: UITextField!
     
@@ -163,7 +164,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func generateMemedImage() -> UIImage {
         // Hide toolbar and navbar
-        hideBars()
+        setBarsHidden(true)
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -172,19 +173,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIGraphicsEndImageContext()
         
         // Show toolbar and navbar
-        showBars()
+        setBarsHidden(false)
         
         return memedImage
     }
     
-    func hideBars() {
-        navigationController?.setToolbarHidden(true, animated: true)
-        toolbar.isHidden = true
-    }
-    
-    func showBars() {
-        navigationController?.setToolbarHidden(false, animated: true)
-        toolbar.isHidden = false
+    func setBarsHidden(_ isHidden: Bool) {
+        navigationController?.setNavigationBarHidden(isHidden, animated: false)
+        navigationBar.isHidden = isHidden
+        toolbar.isHidden = isHidden
     }
     
     func saveMemeInGallery(selectedImage: UIImage) {
