@@ -37,9 +37,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Do any additional setup after loading the view, typically from a nib.
         topMemeText.delegate = self
         bottomMemeText.delegate = self
+        
+        resetUI()
+    }
+    
+    func resetUI() {
         configureTextProperties(topMemeText, "TOP")
         configureTextProperties(bottomMemeText, "BOTTOM")
         buttonShare.isEnabled = false
+        imageView.image = nil
     }
     
     func configureTextProperties(_ textField: UITextField, _ defaulText: String) {
@@ -76,9 +82,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func cancel() {
-        // close the app
-        UIControl().sendAction(#selector(NSXPCConnection.suspend),
-                               to: UIApplication.shared, for: nil)
+        // reset ui
+        resetUI()
     }
     
     @IBAction func shareMeme() {
