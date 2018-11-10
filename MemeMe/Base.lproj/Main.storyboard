@@ -111,6 +111,7 @@
                         <outlet property="buttonCancel" destination="yYm-FG-Vkz" id="9i4-i9-UvL"/>
                         <outlet property="buttonShare" destination="QEE-DR-PsO" id="hsc-ZZ-xoR"/>
                         <outlet property="imageView" destination="WCB-R3-vQE" id="5WD-vY-cYp"/>
+                        <outlet property="navigationBar" destination="T9o-kr-QJ6" id="EKQ-VN-FQ5"/>
                         <outlet property="toolbar" destination="P99-i7-cdX" id="gjW-xJ-s4E"/>
                         <outlet property="topMemeText" destination="zNR-4C-pVK" id="slj-oP-DX2"/>
                     </connections>
