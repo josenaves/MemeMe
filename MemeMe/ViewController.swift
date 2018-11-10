@@ -27,6 +27,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         subscribeToKeyboardNotifications()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        topMemeText.becomeFirstResponder()
+        bottomMemeText.becomeFirstResponder()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
