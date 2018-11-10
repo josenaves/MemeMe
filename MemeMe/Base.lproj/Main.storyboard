@@ -21,14 +21,14 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="MemeMe" id="Ljw-jL-GoO">
-                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="yYm-FG-Vkz">
-                                            <connections>
-                                                <action selector="cancel" destination="BYZ-38-t0r" id="jls-7j-Hpk"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="QEE-DR-PsO">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="QEE-DR-PsO">
                                             <connections>
                                                 <action selector="shareMeme" destination="BYZ-38-t0r" id="VxG-Nq-lmE"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="yYm-FG-Vkz">
+                                            <connections>
+                                                <action selector="cancel" destination="BYZ-38-t0r" id="jls-7j-Hpk"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
