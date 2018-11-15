@@ -38,6 +38,8 @@
 	<string>You can select photos to attach to reports.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Please allow access to save photo in your photo library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow access to your camera</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
