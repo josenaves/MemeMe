@@ -26,13 +26,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // subcribe to keyboard notifications, to allow the view to raise when necessary
         subscribeToKeyboardNotifications()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        topMemeText.becomeFirstResponder()
-        bottomMemeText.becomeFirstResponder()
-    }
-    
+        
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
@@ -171,6 +165,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // This is important to only shift the view when we are editing the bottom text field
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
+        textField.text = ""
     }
     
     func generateMemedImage() -> UIImage {
