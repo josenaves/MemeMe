@@ -22,7 +22,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     var activeTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
-        buttonCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        super.viewWillAppear(animated)
         // subcribe to keyboard notifications, to allow the view to raise when necessary
         subscribeToKeyboardNotifications()
     }
@@ -37,6 +37,9 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         // Do any additional setup after loading the view, typically from a nib.
         topMemeText.delegate = self
         bottomMemeText.delegate = self
+        
+        // check if there's a camera available on device
+        buttonCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
         resetUI()
     }
