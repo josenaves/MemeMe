@@ -34,13 +34,9 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        topMemeText.delegate = self
-        bottomMemeText.delegate = self
-        
+
         // check if there's a camera available on device
         buttonCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        
         resetUI()
     }
     
@@ -52,18 +48,19 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     }
     
     func configureTextProperties(_ textField: UITextField, _ defaulText: String) {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-
         let memeTextAttributes:[NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white,
             NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
             NSAttributedString.Key.strokeWidth: -1.00,
-            NSAttributedString.Key.paragraphStyle: paragraphStyle
+            NSAttributedString.Key.paragraphStyle: NSMutableParagraphStyle()
         ]
-        textField.defaultTextAttributes = memeTextAttributes
         
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
+        textField.autocapitalizationType = .allCharacters
+        textField.delegate = self
+
         // make the background transparent
         textField.backgroundColor = UIColor.clear
         
@@ -71,19 +68,20 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     }
 
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
+        pickAnImage(.camera)
     }
     
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
-        present(pickerController, animated: true, completion: nil)
+        pickAnImage(.photoLibrary)
     }
     
+    private func pickAnImage(_ type: UIImagePickerController.SourceType) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = type
+        present(picker, animated: true, completion: nil)
+    }
+
     @IBAction func cancel() {
         // reset ui
         resetUI()
