@@ -41,13 +41,13 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     }
     
     func resetUI() {
-        configureTextProperties(topMemeText, "TOP")
-        configureTextProperties(bottomMemeText, "BOTTOM")
+        configureTextProperties(topMemeText)
+        configureTextProperties(bottomMemeText)
         buttonShare.isEnabled = false
         imageView.image = nil
     }
     
-    func configureTextProperties(_ textField: UITextField, _ defaulText: String) {
+    func configureTextProperties(_ textField: UITextField) {
         let memeTextAttributes:[NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white,
@@ -63,8 +63,6 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
         // make the background transparent
         textField.backgroundColor = UIColor.clear
-        
-        textField.text = defaulText
     }
 
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
@@ -166,7 +164,6 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     // This is important to only shift the view when we are editing the bottom text field
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
-        textField.text = ""
     }
     
     func generateMemedImage() -> UIImage {
